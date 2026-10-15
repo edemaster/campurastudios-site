@@ -1,0 +1,156 @@
+/* Campura Studios site. One stylesheet for every page.
+   Fonts are self-hosted (OFL, see /assets/fonts/LICENSE.md): loading them from
+   Google's servers sends the visitor's IP to Google, which German courts have
+   ruled needs consent (LG München I, 3 O 17493/20). Self-hosted needs none. */
+
+@font-face { font-family: "Silkscreen"; src: url("fonts/silkscreen-400.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Atkinson Hyperlegible"; src: url("fonts/atkinson-400.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Atkinson Hyperlegible"; src: url("fonts/atkinson-700.woff2") format("woff2"); font-weight: 700; font-display: swap; }
+
+/* The game's own colours: the wordmark's ink and cream, the flag's yellow,
+   the course's two greens and its water. */
+:root {
+	--ink: #3d2b30;
+	--ink-soft: #68454a;
+	--cream: #f4efe3;
+	--paper: #fbf8f1;
+	--flag: #e8c25a;
+	--grass: #6c9446;
+	--grass-dark: #4b6738;
+	--water: #477d7f;
+	--bg: var(--paper);
+	--fg: var(--ink);
+	--muted: var(--ink-soft);
+	--card: #ffffff;
+	--line: #e3dccd;
+	color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+	:root:not([data-theme="light"]) {
+		--bg: #221a1c;
+		--fg: #f4efe3;
+		--muted: #c9bcb0;
+		--card: #2e2326;
+		--line: #463439;
+		color-scheme: dark;
+	}
+}
+:root[data-theme="dark"] {
+	--bg: #221a1c;
+	--fg: #f4efe3;
+	--muted: #c9bcb0;
+	--card: #2e2326;
+	--line: #463439;
+	color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+	margin: 0;
+	background: var(--bg);
+	color: var(--fg);
+	font: 18px/1.6 "Atkinson Hyperlegible", system-ui, sans-serif;
+}
+img.px { image-rendering: pixelated; }
+a { color: inherit; text-decoration-color: var(--flag); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+a:hover { text-decoration-color: currentColor; }
+:focus-visible { outline: 3px solid var(--flag); outline-offset: 3px; }
+
+.wrap { max-width: 1040px; margin: 0 auto; padding: 0 16px; }
+.pixel { font-family: "Silkscreen", monospace; font-weight: 400; letter-spacing: 0.02em; }
+
+/* Header and footer */
+.top { border-bottom: 1px solid var(--line); }
+.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 64px; }
+.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; font-size: 18px; }
+.brand img { width: 26px; height: 26px; }
+.top nav { display: flex; gap: 20px; font-size: 16px; }
+.top nav a { text-decoration: none; }
+.top nav a:hover { text-decoration: underline; }
+
+footer { border-top: 1px solid var(--line); margin-top: 72px; padding: 28px 0 40px; font-size: 15px; color: var(--muted); }
+footer .wrap { display: flex; flex-wrap: wrap; gap: 12px 28px; justify-content: space-between; }
+footer nav { display: flex; flex-wrap: wrap; gap: 8px 20px; }
+
+/* The course behind the hero: a 2:1 isometric lattice in the game's two greens. */
+.course {
+	background-color: var(--grass);
+	background-image:
+		linear-gradient(26.565deg, transparent 49%, rgba(0,0,0,0.07) 49%, rgba(0,0,0,0.07) 51%, transparent 51%),
+		linear-gradient(-26.565deg, transparent 49%, rgba(0,0,0,0.07) 49%, rgba(0,0,0,0.07) 51%, transparent 51%);
+	background-size: 64px 32px;
+	color: var(--cream);
+}
+
+.hero { padding: 72px 0 80px; text-align: center; }
+.hero .flag { width: 104px; height: 104px; }
+.hero h1 {
+	margin: 16px 0 8px;
+	font-size: clamp(34px, 8vw, 72px);
+	line-height: 1.05;
+	color: var(--cream);
+	text-shadow: 0 4px 0 var(--ink), 4px 4px 0 var(--ink);
+}
+.hero .tag { font-size: clamp(18px, 2.6vw, 22px); max-width: 640px; margin: 20px auto 32px; text-shadow: 0 1px 0 rgba(0,0,0,0.35); }
+.hero .note { margin-top: 14px; font-size: 15px; opacity: 0.9; }
+
+.btn {
+	display: inline-block;
+	padding: 14px 26px;
+	background: var(--flag);
+	color: var(--ink);
+	font-family: "Silkscreen", monospace;
+	font-size: 18px;
+	text-decoration: none;
+	border: 3px solid var(--ink);
+	box-shadow: 4px 4px 0 var(--ink);
+}
+.btn:hover { transform: translate(-1px, -1px); box-shadow: 5px 5px 0 var(--ink); }
+.btn[aria-disabled="true"] { cursor: default; }
+.btn[aria-disabled="true"]:hover { transform: none; box-shadow: 4px 4px 0 var(--ink); }
+
+section { padding: 56px 0 0; }
+h2 { font-family: "Silkscreen", monospace; font-weight: 400; font-size: clamp(24px, 4vw, 32px); line-height: 1.2; margin: 0 0 20px; }
+h3 { font-size: 20px; margin: 0 0 6px; }
+.lede { font-size: 20px; max-width: 720px; }
+
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+.card { background: var(--card); border: 1px solid var(--line); padding: 22px; }
+.card p { margin: 0; color: var(--muted); }
+
+.chaos { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px 24px; }
+.chaos li { padding-left: 22px; position: relative; }
+.chaos li::before { content: ""; position: absolute; left: 0; top: 0.55em; width: 10px; height: 10px; background: var(--flag); border: 2px solid var(--ink); }
+.chaos b { display: block; }
+.chaos span { color: var(--muted); font-size: 16px; }
+
+.shots { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
+.shots img { width: 100%; height: auto; display: block; border: 3px solid var(--ink); image-rendering: pixelated; }
+
+.follow { display: flex; flex-wrap: wrap; gap: 10px; padding: 0; margin: 0; list-style: none; }
+.follow a { display: inline-block; padding: 8px 16px; border: 2px solid var(--fg); text-decoration: none; font-size: 16px; }
+.follow a:hover { background: var(--fg); color: var(--bg); }
+
+.legal { max-width: 760px; }
+.legal h1 { font-family: "Silkscreen", monospace; font-weight: 400; font-size: clamp(28px, 5vw, 40px); margin: 48px 0 16px; }
+/* German compounds ("Verbraucherstreitbeilegung") are wider than a phone in the pixel face. */
+.legal h1, .legal h2 { hyphens: auto; overflow-wrap: anywhere; }
+.legal h2 { font-size: 22px; margin-top: 36px; }
+.todo { background: #fff3c4; color: #3d2b30; padding: 0 4px; }
+
+.studio { padding: 96px 0 40px; }
+.studio h1 { font-family: "Silkscreen", monospace; font-weight: 400; font-size: clamp(34px, 7vw, 60px); line-height: 1.1; margin: 0 0 16px; }
+.game-card { display: grid; grid-template-columns: 1fr; border: 3px solid var(--ink); background: var(--card); text-decoration: none; }
+.game-card .course { padding: 40px 24px; text-align: center; }
+.game-card .course img { width: 78px; height: 78px; }
+.game-card .course div { font-family: "Silkscreen", monospace; font-size: clamp(24px, 5vw, 36px); text-shadow: 3px 3px 0 var(--ink); margin-top: 8px; }
+.game-card .body { padding: 20px 24px; }
+.game-card .body p { margin: 0; color: var(--muted); }
+@media (min-width: 760px) { .game-card { grid-template-columns: 1fr 1fr; } .game-card .course { display: flex; flex-direction: column; justify-content: center; align-items: center; } }
+
+@media (max-width: 520px) {
+	body { font-size: 17px; }
+	.top nav { gap: 14px; font-size: 15px; }
+	.brand span { display: none; }
+}
