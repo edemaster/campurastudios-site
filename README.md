@@ -6,6 +6,9 @@ Static site, no build step. GitHub Pages serves it as-is.
 - `/golfcoursetycoon/`: the game
 - `/impressum/`, `/privacy/`: German legal pages (required for a German operator)
 
+**Never on this site, in any file or commit: a phone number, or Ede's home address.**
+Contact is email only. The Impressum gets a rented virtual business address at release.
+
 Everything still owed is marked `TODO(ede)`: `grep -rn "TODO(ede)" .`
 
 ## Going live (once)
